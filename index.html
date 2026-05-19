@@ -1,1 +1,287 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Hyun Kim</title>
+<link rel="icon" type="image/png" href="del.png">
+
+<style>
+    body {
+        margin: 0;
+        background: #f8f9fb;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+        color: #2d3445;
+        overflow: hidden;
+    }
+
+    #coords-left {
+        position: fixed;
+        top: 15px;
+        left: 20px;
+        font-size: 15px;
+        opacity: 0.65;
+    }
+
+    #coords-right {
+        position: fixed;
+        top: 15px;
+        right: 20px;
+        font-size: 15px;
+        opacity: 0.65;
+    }
+
+    #counter {
+        position: fixed;
+        top: 18px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 13px;
+        opacity: 0.75;
+        font-family: SFMono-Regular, Menlo, Consolas, monospace;
+        font-variant-numeric: tabular-nums;
+    }
+
+    #content {
+        position: absolute;
+        top: 44%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        width: 100%;
+    }
+
+    #ascii-donut {
+        font-family: "Courier New", monospace;
+        white-space: pre;
+        font-size: 9px;
+        line-height: 9px;
+        opacity: 0.76;
+        margin-bottom: 45px;
+    }
+
+    h1 {
+        font-family: Georgia, serif;
+        font-size: 32px;
+        font-weight: 500;
+        margin-bottom: 30px;
+    }
+
+    #bullets {
+        width: 520px;
+        margin: 0 auto;
+        color: #4a4f58;
+        font-size: 17px;
+        text-align: left;
+    }
+
+    .typed-line {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 16px;
+        margin: 18px 0;
+    }
+
+    .bullet-mark {
+        font-family: SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 18px;
+        opacity: 0.8;
+        margin-top: 2px;
+    }
+
+    .bullet-text {
+        white-space: pre-wrap;
+        font-size: 17px;
+        line-height: 1.7;
+        flex: 1;
+    }
+
+    #glitch {
+        position: fixed;
+        bottom: 25px;
+        left: 20px;
+        font-family: SFMono-Regular, Menlo, Consolas, monospace;
+        opacity: 0.5;
+        font-size: 12px;
+    }
+
+    #footer {
+        position: fixed;
+        bottom: 25px;
+        left: 50%;
+        transform: translateX(-50%);
+        letter-spacing: 2px;
+        font-size: 12px;
+    }
+
+    #footer a {
+        color: #2d3445;
+        text-decoration: none;
+        margin: 0 18px;
+        opacity: 0.75;
+    }
+
+    #footer a:hover {
+        opacity: 1;
+    }
+
+    #br-box {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        display: flex;
+        width: 26px;
+        height: 13px;
+    }
+
+    #br-box .sq {
+        width: 13px;
+        height: 13px;
+    }
+
+    #br-box .left {
+        background: #9ca3af;
+    }
+
+    #br-box .right {
+        background: #000000;
+    }
+</style>
+</head>
+
+<body>
+
+<div id="coords-left">40°48'26.3"N</div>
+<div id="coords-right">73°57'49.5"W</div>
+
+<div id="counter"></div>
+
+<div id="content">
+
+    <div id="ascii-donut"></div>
+
+    <h1>Hyun Kim</h1>
+
+    <div id="bullets">
+        <div class="typed-line">
+            <span class="bullet-mark">&gt;</span>
+            <span class="bullet-text" id="line1"></span>
+        </div>
+
+        <div class="typed-line">
+            <span class="bullet-mark">&gt;</span>
+            <span class="bullet-text" id="line2"></span>
+        </div>
+
+        <div class="typed-line">
+            <span class="bullet-mark">&gt;</span>
+            <span class="bullet-text" id="line3"></span>
+        </div>
+    </div>
+</div>
+
+<div id="glitch"></div>
+
+<div id="footer">
+    <a href="https://www.linkedin.com/in/hyunkimm" target="_blank">LINKEDIN</a>
+    <a href="https://github.com/hyunnkim" target="_blank">GITHUB</a>
+</div>
+
+<div id="br-box">
+    <div class="sq left"></div>
+    <div class="sq right"></div>
+</div>
+
+<script>
+const glitch = document.getElementById("glitch");
+const glitchChars = "!@#$%^&*()_+=-[]{}|;:',.<>?/~";
+function randomGlitch(n) {
+    let o = "";
+    for (let i = 0; i < n; i++) o += glitchChars[Math.floor(Math.random() * glitchChars.length)];
+    return o;
+}
+setInterval(() => glitch.textContent = randomGlitch(12), 120);
+
+const globalStart = 1765063006869;
+
+function updateTimer() {
+    let now = Date.now();
+    let diff = now - globalStart;
+
+    let hours = Math.floor(diff / 3600000);
+    let minutes = Math.floor((diff % 3600000) / 60000);
+    let seconds = Math.floor((diff % 60000) / 1000);
+    let ms = diff % 1000;
+
+    document.getElementById("counter").textContent =
+        hours.toString() +
+        minutes.toString().padStart(2, "0") +
+        seconds.toString().padStart(2, "0") +
+        ms.toString().padStart(3, "0");
+
+    requestAnimationFrame(updateTimer);
+}
+updateTimer();
+
+const donut = document.getElementById("ascii-donut");
+const donutChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
+
+function renderCircle() {
+    const outerRadius = 14;
+    const innerRadius = 7;
+    const stretch = 2.4;
+    let out = "";
+    for (let y = -outerRadius; y <= outerRadius; y++) {
+        let row = "";
+        for (let x = -outerRadius * stretch; x <= outerRadius * stretch; x++) {
+            let dx = x / stretch;
+            let d = Math.sqrt(dx * dx + y * y);
+            let jitter = (Math.random() - 0.5) * 0.9;
+            let dr = d + jitter;
+            if (dr >= innerRadius && dr <= outerRadius) {
+                if (Math.random() < 0.9) {
+                    row += donutChars[Math.floor(Math.random() * donutChars.length)];
+                } else {
+                    row += " ";
+                }
+            } else {
+                row += " ";
+            }
+        }
+        out += row + "\n";
+    }
+    donut.textContent = out;
+}
+setInterval(renderCircle, 120);
+renderCircle();
+
+const textLines = [
+    "I enjoy being at the intersection of probabilistic ml, rl, and nlp",
+    "Currently, I am studying applied math, computer science, and statistics at Columbia University",
+    "My hobbies come and go. For now, I skateboard, enjoy cooking (and eating), and follow the quantitative stock and cryptocurrency trading space"
+];
+
+let speed = 12;
+
+function typeLine(idx) {
+    if (idx >= textLines.length) return;
+    let el = document.getElementById("line" + (idx + 1));
+    let text = textLines[idx];
+    let i = 0;
+    function typeChar() {
+        if (i <= text.length) {
+            el.textContent = text.substring(0, i);
+            i++;
+            setTimeout(typeChar, speed);
+        } else {
+            setTimeout(() => typeLine(idx + 1), 350);
+        }
+    }
+    typeChar();
+}
+typeLine(0);
+</script>
+
+</body>
+</html>
