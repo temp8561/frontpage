@@ -1,287 +1,173 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Will Kim</title>
-<link rel="icon" type="image/png" href="del.png">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<style>
+  <title>William Kim</title>
+
+  <link rel="icon" type="image/png" href="del.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <meta name="description" content="William Kim's personal website" />
+  <meta name="color-scheme" content="light" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
-        margin: 0;
-        background: #f8f9fb;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-        color: #2d3445;
-        overflow: hidden;
+      font-family: "IBM Plex Mono", "Menlo", "Consolas", "Monaco", monospace;
+      font-size: 14px;
+      line-height: 1.7;
+      color: #222;
+      background: #e8e8e8;
+      -webkit-font-smoothing: antialiased;
     }
 
-    #coords-left {
-        position: fixed;
-        top: 15px;
-        left: 20px;
-        font-size: 15px;
-        opacity: 0.65;
-    }
-
-    #coords-right {
-        position: fixed;
-        top: 15px;
-        right: 20px;
-        font-size: 15px;
-        opacity: 0.65;
-    }
-
-    #counter {
-        position: fixed;
-        top: 18px;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 13px;
-        opacity: 0.75;
-        font-family: SFMono-Regular, Menlo, Consolas, monospace;
-        font-variant-numeric: tabular-nums;
-    }
-
-    #content {
-        position: absolute;
-        top: 44%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-        width: 100%;
-    }
-
-    #ascii-donut {
-        font-family: "Courier New", monospace;
-        white-space: pre;
-        font-size: 9px;
-        line-height: 9px;
-        opacity: 0.76;
-        margin-bottom: 45px;
+    main {
+      max-width: 580px;
+      margin: 80px auto;
+      padding: 0 24px;
     }
 
     h1 {
-        font-family: Georgia, serif;
-        font-size: 32px;
-        font-weight: 500;
-        margin-bottom: 30px;
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      letter-spacing: -0.5px;
     }
 
-    #bullets {
-        width: 520px;
-        margin: 0 auto;
-        color: #4a4f58;
-        font-size: 17px;
-        text-align: left;
+    nav {
+      margin-top: 2px;
+      margin-bottom: 8px;
+      font-size: 13px;
     }
 
-    .typed-line {
-        display: flex;
-        align-items: flex-start;
-        justify-content: flex-start;
-        gap: 16px;
-        margin: 18px 0;
+    nav a {
+      color: #3355cc;
+      text-decoration: none;
+      transition: color 0.15s;
+      margin-right: 16px;
     }
 
-    .bullet-mark {
-        font-family: SFMono-Regular, Menlo, Consolas, monospace;
-        font-size: 18px;
-        opacity: 0.8;
-        margin-top: 2px;
+    nav a:hover {
+      color: #1a1a1a;
     }
 
-    .bullet-text {
-        white-space: pre-wrap;
-        font-size: 17px;
-        line-height: 1.7;
-        flex: 1;
+    p {
+      margin-top: 20px;
     }
 
-    #glitch {
-        position: fixed;
-        bottom: 25px;
-        left: 20px;
-        font-family: SFMono-Regular, Menlo, Consolas, monospace;
-        opacity: 0.5;
-        font-size: 12px;
+    .section-heading {
+      margin-top: 28px;
+      margin-bottom: 2px;
+      color: #444;
     }
 
-    #footer {
-        position: fixed;
-        bottom: 25px;
-        left: 50%;
-        transform: translateX(-50%);
-        letter-spacing: 2px;
-        font-size: 12px;
+    a {
+      color: #3355cc;
+      text-decoration: none;
+      transition: color 0.15s;
     }
 
-    #footer a {
-        color: #2d3445;
-        text-decoration: none;
-        margin: 0 18px;
-        opacity: 0.75;
+    a:hover {
+      color: #1a1a1a;
     }
 
-    #footer a:hover {
-        opacity: 1;
+    ul {
+      margin-top: 4px;
+      padding-left: 24px;
+      list-style: none;
     }
 
-    #br-box {
-        position: fixed;
-        bottom: 25px;
-        right: 25px;
-        display: flex;
-        width: 26px;
-        height: 13px;
+    ul li {
+      margin-bottom: 3px;
     }
 
-    #br-box .sq {
-        width: 13px;
-        height: 13px;
+    ul.plain li {
+      margin-bottom: 3px;
     }
 
-    #br-box .left {
-        background: #9ca3af;
+    .meta {
+      color: #888;
+      font-size: 12px;
     }
 
-    #br-box .right {
-        background: #000000;
+    .tag {
+      color: #666;
+      font-size: 11px;
+      border: 1px solid #bbb;
+      border-radius: 999px;
+      padding: 1px 5px;
+      margin-left: 6px;
+      white-space: nowrap;
     }
-</style>
+
+    @media (max-width: 480px) {
+      main {
+        margin: 40px auto;
+        padding: 0 20px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      body {
+        font-size: 13px;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <main>
+    <header>
+      <h1>William Kim</h1>
 
-<div id="coords-left">40°48'26.3"N</div>
-<div id="coords-right">73°57'49.5"W</div>
+      <nav>
+        <a href="https://github.com/hyunnkim">GitHub</a>
+        <a href="https://linkedin.com/in/hyunkimm">LinkedIn</a>
+      </nav>
+    </header>
 
-<div id="counter"></div>
+    <p>
+      I'm currently studying applied math and computer science at
+      <a href="https://www.jhu.edu/">Johns Hopkins University</a>,
+      where I am mostly interested in probabilistic ML, NLP, and RL methods.
+      I previously was studying at <a href="https://www.columbia.edu">Columbia University</a>.
+    </p>
 
-<div id="content">
+    <p>
+      My hobbies come and go. Currently, I skateboard, enjoy cooking and eating, play chess,
+      and follow the quantitative stock and cryptocurrency trading space.
+    </p>
 
-    <div id="ascii-donut"></div>
+    <p class="section-heading">
+      Some other independent projects I have worked on:
+    </p>
 
-    <h1>will kim</h1>
-
-    <div id="bullets">
-        <div class="typed-line">
-            <span class="bullet-mark">&gt;</span>
-            <span class="bullet-text" id="line1"></span>
-        </div>
-
-        <div class="typed-line">
-            <span class="bullet-mark">&gt;</span>
-            <span class="bullet-text" id="line2"></span>
-        </div>
-
-        <div class="typed-line">
-            <span class="bullet-mark">&gt;</span>
-            <span class="bullet-text" id="line3"></span>
-        </div>
-    </div>
-</div>
-
-<div id="glitch"></div>
-
-<div id="footer">
-    <a href="https://www.linkedin.com/in/hyunkimm" target="_blank">LINKEDIN</a>
-    <a href="https://github.com/hyunnkim" target="_blank">GITHUB</a>
-</div>
-
-<div id="br-box">
-    <div class="sq left"></div>
-    <div class="sq right"></div>
-</div>
-
-<script>
-const glitch = document.getElementById("glitch");
-const glitchChars = "!@#$%^&*()_+=-[]{}|;:',.<>?/~";
-function randomGlitch(n) {
-    let o = "";
-    for (let i = 0; i < n; i++) o += glitchChars[Math.floor(Math.random() * glitchChars.length)];
-    return o;
-}
-setInterval(() => glitch.textContent = randomGlitch(12), 120);
-
-const globalStart = 1765063006869;
-
-function updateTimer() {
-    let now = Date.now();
-    let diff = now - globalStart;
-
-    let hours = Math.floor(diff / 3600000);
-    let minutes = Math.floor((diff % 3600000) / 60000);
-    let seconds = Math.floor((diff % 60000) / 1000);
-    let ms = diff % 1000;
-
-    document.getElementById("counter").textContent =
-        hours.toString() +
-        minutes.toString().padStart(2, "0") +
-        seconds.toString().padStart(2, "0") +
-        ms.toString().padStart(3, "0");
-
-    requestAnimationFrame(updateTimer);
-}
-updateTimer();
-
-const donut = document.getElementById("ascii-donut");
-const donutChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
-
-function renderCircle() {
-    const outerRadius = 14;
-    const innerRadius = 7;
-    const stretch = 2.4;
-    let out = "";
-    for (let y = -outerRadius; y <= outerRadius; y++) {
-        let row = "";
-        for (let x = -outerRadius * stretch; x <= outerRadius * stretch; x++) {
-            let dx = x / stretch;
-            let d = Math.sqrt(dx * dx + y * y);
-            let jitter = (Math.random() - 0.5) * 0.9;
-            let dr = d + jitter;
-            if (dr >= innerRadius && dr <= outerRadius) {
-                if (Math.random() < 0.9) {
-                    row += donutChars[Math.floor(Math.random() * donutChars.length)];
-                } else {
-                    row += " ";
-                }
-            } else {
-                row += " ";
-            }
-        }
-        out += row + "\n";
-    }
-    donut.textContent = out;
-}
-setInterval(renderCircle, 120);
-renderCircle();
-
-const textLines = [
-    "I enjoy being at the intersection of probabilistic ml, rl, and nlp",
-    "Currently, I am studying applied math, computer science, and statistics at Columbia University",
-    "My hobbies come and go. For now, I skateboard, enjoy cooking (and eating), and follow the quantitative stock and cryptocurrency trading space"
-];
-
-let speed = 12;
-
-function typeLine(idx) {
-    if (idx >= textLines.length) return;
-    let el = document.getElementById("line" + (idx + 1));
-    let text = textLines[idx];
-    let i = 0;
-    function typeChar() {
-        if (i <= text.length) {
-            el.textContent = text.substring(0, i);
-            i++;
-            setTimeout(typeChar, speed);
-        } else {
-            setTimeout(() => typeLine(idx + 1), 350);
-        }
-    }
-    typeChar();
-}
-typeLine(0);
-</script>
-
+    <ul class="plain">
+      <li>
+        <a href="#">Population-based neural network via replicator-diffusion</a>
+        <span class="tag">ML</span>
+      </li>
+      <li>
+        <a href="#">Multi-factor forecasting ETF model</a>
+        <span class="tag">quant</span>
+      </li>
+      <li>
+        <a href="#">Cross-sectional alpha gen using GBT</a>
+        <span class="tag">research</span>
+      </li>
+    </ul>
+  </main>
 </body>
 </html>
